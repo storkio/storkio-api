@@ -1,0 +1,47 @@
+import createError from 'http-errors';
+import _ from 'lodash';
+import {{properCase name}} from './{{name}}.model';
+
+export const index = () => {{properCase name}}.find({});
+
+export const show = async ({params: {id}}) => {
+  const {{name}} = await {{properCase name}}.findById(id);
+
+  if (!{{name}}) {
+    throw createError(404);
+  }
+
+  return {{name}};
+}
+
+export const create = async ({body}, res) => {
+  const data = _.pick(body, ['name']);
+
+  const {{name}} = await {{properCase name}}.create(data);
+
+  if (!{{name}}) {
+    throw createError(404);
+  }
+
+  res.status(201);
+
+  return {{name}};
+}
+
+export const update = async ({params: {id}, body}) => {
+  const data = _.pick(body, ['name']);
+
+  const res = await {{properCase name}}.findOneAndUpdate({_id: id}, {$set: data}, {new: true});
+
+  if (!res) {
+    throw createError(404);
+  }
+}
+
+export const destroy = async ({params: {id}}) => {
+  const {{name}} = await {{properCase name}}.findOneAndRemove({_id: id});
+
+  if (!{{name}}) {
+    throw createError(404);
+  }
+}

@@ -1,0 +1,12 @@
+import {Schema} from 'mongoose';
+import {createSeedModel} from 'mongoose-plugin-seed';
+import seed from './{{name}}.seed';
+
+const {{properCase name}}Schema = new Schema({
+  name: {
+    type: String,
+    required: true
+  }
+});
+
+export default createSeedModel('{{properCase name}}', {{properCase name}}Schema, seed);

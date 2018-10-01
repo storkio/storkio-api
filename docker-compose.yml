@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+     - "9090:9090"
+    volumes:
+     - .:/usr/src/app
+    depends_on:
+     - mongo
+    environment:
+     - MONGO_URI=mongodb://mongo/project_starter
+  mongo:
+    image: mongo
